@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>encurtador de url</title>
+</head>
+<body>
+    <div>
+        <h1>encurtador de url</h1>
+        <input type="text" placeholder="digite um texto...">
+        <div class="res"></div>
+        <button>aperte aqui aa</button>
+    </div>
+    <script>
+        const input = document.querySelector("input"); 
+        const btn = document.querySelector("button"); 
+        const res= document.querySelector(".res"); 
+
+        btn.addEventListener("click", async()=>{
+            const response = await fetch("http://localhost:8080/encurtar", {
+                method:"POST", 
+                headers:{
+                    "Content-Type":"application/json", 
+                }, 
+                body: JSON.stringify({
+                    URL: input.value
+                })
+            }); 
+         
+         const data = await response.json(); 
+             
+            res.innerHTML = `${data.urlGerada}`;  
+        }); 
+
+    </script>
+</body>
+</html>
